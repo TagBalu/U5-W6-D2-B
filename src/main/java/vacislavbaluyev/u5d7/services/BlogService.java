@@ -8,6 +8,7 @@ import vacislavbaluyev.u5d7.payloads.NewBlogPost;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -25,4 +26,19 @@ public class BlogService {
         log.info("Blog salvato: " + blog);
         return blog;
     }
+    public Blog findById(UUID id){
+        Blog found = null;
+        for (Blog blog : this.blogList) {
+            if (blog.getId().equals(id)){
+                found = blog;
+                break;
+            }
+        }
+        if (found == null){
+            throw new IllegalArgumentException("Blog not found");
+        }
+        return found;
+    }
+
+
 }
